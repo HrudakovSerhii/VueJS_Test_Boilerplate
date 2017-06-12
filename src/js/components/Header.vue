@@ -18,10 +18,11 @@
 		width: 100%;
 
 		.c-header-c {
-			// background-image: url('../assets/hz/header.png');
+			background-image: url('~Images/hz/header.png');
 			background-size: contain;
 			text-align: center;
 			height: 50px;
+			top: 0px;
 
 			.c-header-content {
 				text-align: center;

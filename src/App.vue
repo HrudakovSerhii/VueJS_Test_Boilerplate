@@ -18,6 +18,7 @@
   export default {
     name: 'app'
   }
+
 </script>
 
 <style lang="scss">
@@ -33,7 +34,7 @@
     color: #2c3e50;
 
     .main-content {
-      background-image: url('../public/assets/hz/background.png');
+      background-image: url('~Images/hz/background.png');
       background-repeat: repeat-x;
       background-size: contain;
       height: 100%;
