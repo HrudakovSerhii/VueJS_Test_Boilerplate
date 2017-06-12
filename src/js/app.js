@@ -1,5 +1,6 @@
 import Components from 'Components/component';
 import baseStyles from 'Styles/base.css';
+import style from 'Styles/style.scss';
 import Cats from './cats';
 import $ from 'jquery';
 import 'babel-polyfill';
