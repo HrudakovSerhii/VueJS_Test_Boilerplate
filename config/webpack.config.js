@@ -8,60 +8,84 @@ var resolve = function(path) {
 }
 
 module.exports = {
-	devtool: "source-map",
+	devtool: 'source-map',
 	context: resolve('./src'),
 	entry: {
-		app: resolve('src/js/app.js')
+		app: resolve('src/main.js')
 	},
     output: {
     	filename: '[name].bundle.js',
 		path: resolve('./dist/assets'),
-		publicPath: resolve('/assets'),
+		publicPath: resolve('/assets')
 	},
 	devServer: {
 		contentBase: resolve('./src')
 	},
 	resolve: {
 		alias: {
+			vue: 'vue/dist/vue.js',
 			Components: resolve('src/js/components'),
 			Styles:		resolve('src/css'),
+			Code:  		resolve('src/js'),
 			Images: 	resolve('public/assets'),
 			Utility:    resolve('utils')
 		},
-		extensions: ['.js', '.jsx']
+		extensions: ['.js', '.jsx', '.vue']
 	},
 	module: {
 		loaders: [
 			{
 				test: /\.js$/,
-				exclude: /node_modules/,
-				loader: 'babel-loader'
+				use: 'babel-loader',
+				exclude: /node_modules/
+			},
+			{
+				test: /\.vue$/,
+				use: {
+					loader: 'vue-loader',
+					options: {
+						'css': 'vue-style-loader!css-loader',
+						'scss': 'vue-style-loader!css-loader!sass-loader',
+            			'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+					}
+				}
 			},
 			{
 			    test: /\.(png|gif|jpg|svg)$/,
-			    include: resolve('public/assets'),
 			    use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]',
+			    include: resolve('public/assets')
 			},
 			{
 				test: /\.css$/,
-        		use: ['style-loader', 'css-loader']
+        		use: [
+        			'style-loader',
+        			'css-loader'
+        		]
 			},
 			{
 				test: /\.(sass|scss)$/,
-		        use: [
-		          'style-loader',
-		          'css-loader',
-		          'sass-loader'
-		        ]
+				use: [
+					'style-loader',
+					'css-loader',
+					'sass-loader'
+				]
 			}
+			// {
+			// 	test: /\.css$/,
+			// 	use: ExtractTextPlugin.extract({
+			// 		fallback: 'style-loader',
+		 //        	use: 'css-loader'
+		 //        })
+			// },
+			// {
+		 //        test: /\.(sass|scss)$/,
+		 //        use: ExtractTextPlugin.extract({
+			//     	fallback: 'style-loader',
+			//     	use: 'css-loader!sass-loader',
+			// 	}),
+	  //     	}
 		]
-	},
-	plugins: [
-    	new ExtractTextPlugin({
-    		filename: '[name].bundle.css',
-      		allChunks: true,
-    	})
-  	]
+	}
 }
 
 
