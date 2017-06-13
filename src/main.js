@@ -5,17 +5,12 @@ import $ from 'jquery'
 import 'babel-polyfill'
 
 import Vue from 'vue'
-import App from './App.vue'
+import Apps from './App.vue'
 import router from 'Code/router/index'
-import Header from 'Components/Header.vue'
-import Footer from 'Components/Footer.vue'
-
-Vue.component('app-header', Header)
-Vue.component('app-footer', Footer)
 
 new Vue({
-    el: '#app',
+    el: '#app-el',
     router,
-    template: '<App/>',
-    components: { App }
+    template: '<Apps/>',
+    components: { Apps }
 });

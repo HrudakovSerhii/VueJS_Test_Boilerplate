@@ -15,6 +15,13 @@
 <script>
   import base from 'Styles/base.scss';
 
+  import Vue from 'vue'
+  import Header from 'Components/Header.vue'
+  import Footer from 'Components/Footer.vue'
+
+  Vue.component('app-header', Header)
+  Vue.component('app-footer', Footer)
+
   export default {
     name: 'app'
   }

@@ -25,8 +25,9 @@ module.exports = {
 		alias: {
 			vue: 'vue/dist/vue.js',
 			Components: resolve('src/js/components'),
-			Styles:		resolve('src/css'),
 			Code:  		resolve('src/js'),
+			Styles:		resolve('src/css'),
+			Templates:  resolve('src/templates'),
 			Images: 	resolve('public/assets'),
 			Utility:    resolve('utils')
 		},
