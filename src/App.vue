@@ -27,9 +27,6 @@
     height: 100%;
     min-width: 320px;
     min-height: 480px;
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
 
@@ -47,7 +44,7 @@
         .main-content-container {
           position: relative;
           width: 100%;
-          height: 80%;
+          // height: 80%;
         }
       }
     }

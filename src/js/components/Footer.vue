@@ -7,17 +7,17 @@
         <div class="c-footer-links-container">
             <ul class="c-footer-links">
                 <li>
-                    <address class="footer-links-text">Copyright © 2017 H.J. Heinz B.V.</address>
+                    <address class="footer-links-text">Copyright © 2017</address>
                 </li>
                 <li class="h-spacer">|</li>
                 <li>
-                    <a class="footer-links-text" href="/" target="_blank">
-                        Actievoorwarden
+                    <a class="footer-links-text" href="/#/about" target="_blank">
+                        About
                     </a>
                 </li>
                 <li class="h-spacer">|</li>
                 <li>
-                    <a class="footer-links-text" href="/" target="_blank">Privacy</a>
+                    <a class="footer-links-text" href="/privacy" target="_blank">Privacy</a>
                 </li>
             </ul>
         </div>

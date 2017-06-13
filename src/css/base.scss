@@ -10,6 +10,16 @@ body {
     padding: 0;
 }
 
+h1 {
+	margin: 0;
+}
+
+p, a, h1 {
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 /* Vertical center container */
 .vc-c {
 	position: relative;

@@ -11,6 +11,27 @@
   </div>
 </template>
 
+<script>
+	import $ from 'jquery';
+
+	export default {
+	    name: 'app-header'
+	}
+
+	$(document).ready(function() {
+		$('.c-header-mobile-btn').off();
+		$('.c-header-mobile-btn').on('click', function(e){
+			if ($('.c-header-c').hasClass('mobile-menu')){
+				$('.c-header-c').removeClass('mobile-menu');
+			} else {
+				$('.c-header-c').addClass('mobile-menu');
+			}
+
+			e.preventDefault();
+		});
+	});
+</script>
+
 <style lang="scss">
 
 	.c-header {
@@ -59,7 +80,7 @@
 			position: absolute;
 			width: 22px;
 		    height: 29px;
-			// background: url(../assets/burger.png);
+			background: url('~Images/burger.png');
 		    background-repeat: no-repeat;
 		    right: 20px;
 		    top: 14px;
