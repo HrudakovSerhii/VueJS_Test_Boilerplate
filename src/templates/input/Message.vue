@@ -2,6 +2,7 @@
 	<div class="app-message">
 		<h1>{{ message }}</h1>
 		<app-input :msg="message" @messageChange="message = $event"></app-input>
+		<template src='../html_templates/template.html'></template>
 	</div>
 </template>
 

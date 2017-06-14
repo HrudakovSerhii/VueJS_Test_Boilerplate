@@ -29,18 +29,22 @@
 </script>
 
 <style lang="scss">
+
+  @import "~Styles/base.scss";
+
   #app {
     width: 100%;
     height: 100%;
     min-width: 320px;
-    min-height: 480px;
     text-align: center;
     color: #2c3e50;
 
     .main-content {
-      background-image: url('~Images/hz/background.png');
-      background-repeat: repeat-x;
-      background-size: contain;
+      // background-image: url('~Images/hz/background.png');
+      // background-repeat: repeat-x;
+      // background-size: contain;
+      background-color: darkcyan;
+      min-height: $main-content-block-height;
       height: 100%;
       width: 100%;
 

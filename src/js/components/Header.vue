@@ -2,6 +2,8 @@
   <div class="c-header">
   	<div class="c-header-c">
 		<div class="c-header-content">
+			<a href="#/" class="c-header-text hz-black-text c-header-home-link">Home</a>
+			<div class="c-header-text hz-black-text c-header-spacer"></div>
 			<a class="c-header-text hz-black-text" href="#/about">About</a>
 			<div class="c-header-text hz-black-text c-header-spacer"></div>
 			<a class="c-header-text hz-black-text" href="#/">New</a>
@@ -55,12 +57,20 @@
 
 				.c-header-text {
 					display: inline-block;
-					line-height: 50px;
-					font-size: 180%;
+					line-height: 45px;
+					font-size: 140%;
 					vertical-align: middle;
 
 					@media( max-width:768px ) {
 						visibility: hidden;
+					}
+				}
+
+				.c-header-home-link {
+					display: none;
+
+					@media( max-width:768px ) {
+						display: inline-block;
 					}
 				}
 			}

@@ -27,12 +27,21 @@
 
 <style lang="scss">
 
+    @import "~Styles/base.scss";
+
 	.c-footer {
-		position: absolute;
 		width: 100%;
 		height: 51px;
-		bottom: 0;
 		background-color: white;
+
+        // Use this parameters for set footer always visible on a screen
+        // bottom: 0;
+        // position: fixed;
+
+        // Use this parameter to hide footer after main-content size is less than minimus size that setted by main-content-block-height variable
+
+        bottom: 51px;
+        position: relative;
 
 		.c-footer-c {
 			display: inline-block;
@@ -43,6 +52,7 @@
 
     			.c-footer-links {
     				list-style-type: none;
+                    line-height: 50px;
 
     				li {
     					display: inline-block;
