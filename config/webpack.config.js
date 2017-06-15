@@ -9,7 +9,7 @@ var resolve = function(path) {
 
 module.exports = {
 	devtool: 'source-map',
-	context: resolve('./src'),
+	context: resolve('./src/'),
 	entry: {
 		app: resolve('src/main.js')
 	},
@@ -70,6 +70,17 @@ module.exports = {
 					'css-loader',
 					'sass-loader'
 				]
+			},
+			{
+				test: /\.html$/,
+				use: [
+					{
+			     		loader: 'html-loader',
+			      		options: {
+			        		minimize: true
+			      		}
+			    	}
+			    ]
 			}
 			// {
 			// 	test: /\.css$/,

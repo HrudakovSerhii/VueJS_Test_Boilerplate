@@ -1,7 +1,7 @@
 <template>
 	<div id="input-f">
-		<p>{{ msg }} (sended from parent component via props)</p>
-		Type here to see data dinding:
+		<!-- <p>{{ msg }} (sended from parent component via props)</p>
+		Type here to see data dinding: -->
 		<input type="text" v-model="message"></input>
 		<input type="text" :value='msg' @input="changeMessage">
 		<h1> {{ message }}</h1>
