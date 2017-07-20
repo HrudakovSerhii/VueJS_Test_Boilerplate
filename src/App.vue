@@ -30,7 +30,7 @@
 
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 
   @import "~Styles/base.scss";
 
