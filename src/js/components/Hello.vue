@@ -24,6 +24,12 @@
 		{ cardName: "three", cardLabel: "image 3" },
 		{ cardName: "four", cardLabel: "image 4" },
 		{ cardName: "five", cardLabel: "image 5" },
+		{ cardName: "six", cardLabel: "image 6" },
+		{ cardName: "one", cardLabel: "image 1" },
+		{ cardName: "two", cardLabel: "image 2" },
+		{ cardName: "three", cardLabel: "image 3" },
+		{ cardName: "four", cardLabel: "image 4" },
+		{ cardName: "five", cardLabel: "image 5" },
 		{ cardName: "six", cardLabel: "image 6" }
 	];
 
