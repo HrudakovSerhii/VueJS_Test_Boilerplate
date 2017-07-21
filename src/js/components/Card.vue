@@ -5,16 +5,19 @@
   	v-on:mousemove="moveCard"
   	v-on:mouseout="stopMoveCard">
 
-  	<div class="card__item" v-bind:style="{ 'webkitTransform': transform } ">
+	<div class="card__item" v-bind:style="{ 'webkitTransform': transform , 'transition' : trans} ">
   		<img class="card__item-img" src="~Images/butterfly.jpg"/>
+  		
+  		<transition name="fade">
+	    	<span v-show="show_shadow" class="card__item-shadow" v-bind:style="{'background': shadow}"></span>
+	  	</transition>
+  		<svg class="card__item-border" xmlns="http://www.w3.org/2000/svg">
+  			<rect height="100%" width="100%" v-bind:style=""></rect>
+  		</svg>
   		<div class="card__item-info">
   			<h1>{{ cName }}</h1>
   			<span class="card__item-type">{{ cLabel }}</span>
   		</div>
-  		<span class="card__item-shadow" v-bind:style="{ 'background': shadow } "></span>
-  		<svg class="card__item-border" xmlns="http://www.w3.org/2000/svg">
-  			<rect height="100%" width="100%" v-bind:style=""></rect>
-  		</svg>
   		<a class="card__item-link" href=""></a>
 	</div>
   </div>
@@ -24,11 +27,24 @@
 	import style from 'Styles/style.scss'
 	import Vue from 'vue'
 
+	var focusOutAnimationStop = true;
+
 	export default {
 		data: function() {
 			return {
 				transform: '',
-				shadow: ''
+				trans: '',
+				shadow: '',
+				rX: 0,
+				rY: 0,
+				angle: 0,
+				transparent: 0,
+				prevAngle: 0,
+				prevTransparent: 0,
+				animCount: 0,
+				animTimer: 0,
+				show_shadow: true,
+				enableForStart: false
 			}
 		},
 		props: ['cName', 'cLabel'],
@@ -36,33 +52,95 @@
 		methods: {
 			moveCard: function(event) {
 				// Get % coordinate of mouse
-				var mpX = event.offsetX / (event.srcElement.clientWidth / 100);
-				var mpY = event.offsetY / (event.srcElement.clientHeight / 100);
+				var mpX = event.offsetX / (this.$el.clientWidth / 100);
+				var mpY = event.offsetY / (this.$el.clientHeight / 100);
 
 				// Calculate rotation values (trick for work)
-				var rX = (50 - mpY) / 8;
-				var rY;
+				this.rX = (50 - mpY) / 10;
 
 				if (mpX > 50) {
-					rY =  mpX / 8 - 5;
+					this.rY =  mpX / 10 - 5;
 				} else {
-					rY = (mpX - 50) / 10;
+					this.rY = (mpX - 50) / 10;
 				}
 
-				var angle = 30 / 100 * mpX + 30;
-				var transparent = (40 / 100) * mpY + 20;
+				this.angle = 30 / 100 * mpX + 30;
+				this.transparent = (60 / 100) * mpY + 40;
 
-				this.shadow = "linear-gradient(" + angle + "deg, #ffffff, transparent " + transparent + "%)";
-				this.transform = "rotateX(" + rX + "deg) rotateY(" + rY + "deg)";
+				this.shadow = "linear-gradient(" + this.angle + "deg, #ffffff, transparent " + this.transparent + "%)";
+				this.transform = "rotateX(" + this.rX + "deg) rotateY(" + this.rY + "deg)";
 			},
 
 			clickCard: function() {
-				console.log('click');
+				this.show_shadow = !this.show_shadow;
 			},
 
-			stopMoveCard: function() {
-				this.transform = "rotateX(" + 0 + "deg) rotateY(" + 0 + "deg)";
-				this.shadow = "linear-gradient(35deg, #ffffff, transparent 40%)";
+			focusOutAnimation: function() {
+				this.animCount--;
+				this.animTimer -= 100;
+
+				this.rX = this.rX > 0 ? -Math.abs(this.rX - 1.2) : Math.abs(this.rX + 1.2);
+				this.rY = this.rY > 0 ? -Math.abs(this.rY - 1.2) : Math.abs(this.rY + 1.2);
+
+				this.angle = this.prevAngle > 45 ? this.angle - 5 : this.angle + 5;
+				this.transparent = this.prevTransparent > 70 ? this.transparent - 7.5 : this.transparent + 7.5
+
+				this.shadow = "linear-gradient(" + this.angle + "deg, #ffffff, transparent " + this.transparent + "%)";
+
+				this.transform = "rotateX(" + this.rX + "deg) rotateY(" + this.rY + "deg)";
+
+				this.show_shadow = !this.show_shadow;
+
+				if (this.animCount > 0) {
+					this.stopMoveCard('e');
+				} else {
+					this.animCount = 0;
+					this.prevAngle = 0;
+					this.prevTransparent = 0;
+					this.trans = "";
+					this.shadow = "linear-gradient(45deg, #ffffff, transparent 40%)";
+					this.transform = "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)";
+				}
+			},
+
+			stopMoveCard: function(event) {
+				if (!this.animCount) {
+					this.animCount = 4;
+					this.animTimer = 600;
+					this.prevAngle = this.angle;
+					this.prevTransparent = this.transparent;
+					this.trans = ".8s ease-in-out";
+
+					this.focusOutAnimation();
+				} else {
+					setTimeout(this.focusOutAnimation, this.animTimer);
+				}
+
+				// this.$el.clientWidth; // get element width;
+
+				// for (var i = 0; i < 3; i++) {
+				// 	console.log(this.rX, this.rY)
+				// 	// var lX = this.rX > 0 ? this.rX - (rX -  ) -1 : this.rX * 1;
+				// 	// var lY = this.rY > 0 ? this.rY * -1 : this.rY * 1;
+				// 	var a = this.angle > 45 ? 30 + (i * 15) : 60 - (i * 15) ;
+				// 	var t = this.transparent > 70 ? 40 - (i * 30) : 100 - (i * 30);
+
+				// 	// console.log(lX, lY, a, t );
+
+
+				// }
+
+				// var timer = setTimeout(function() {
+				// 	this.angle = this.angle > 45 ? 30 + (i * 15) : 60 - (i * 15) ;
+				// 	this.transparent = this.transparent > 70 ? 40 - (i * 30) : 100 - (i * 30);
+				// 	console.log(a, t );
+				// 	// self.transform = "rotateX(" + lX + "deg) rotateY(" + lY + "deg)";
+				// 	this.shadow = "linear-gradient(" + this.angle + "deg, #ffffff, transparent " + this.transparent + "%)";
+				// 	// this.stopMoveCard('e');
+				// 	console.log(this)
+				// }, 200);
+
+				// focusOutAnimation(this.rX, this.rY, this.angle, this.transparent, callBack);
 			}
 		},
 		computed: {
@@ -85,6 +163,15 @@
 	    width: 270px;
 	    height: 410px;
 	    float: left;
+
+	    .fade-enter-active, .fade-leave-active {
+	    	opacity: 0.85;
+		  	transition: opacity .6s
+		}
+
+		.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+		  	opacity: 0
+		}
 
 		.card__item {
 			position: relative;
@@ -149,6 +236,11 @@
 			    backface-visibility: hidden;
 			    background-image: -webkit-linear-gradient(45deg, #ffffff, transparent 40%);
 			    background-image: linear-gradient(45deg, #ffffff, transparent 40%);
+
+			    -webkit-transition: .8s ease-in-out;
+			    -moz-transition: .8s ease-in-out;
+			    -o-transition: .8s ease-in-out;
+			    transition: .8s ease-in-out;
 			}
 
 			.card__item-border {
