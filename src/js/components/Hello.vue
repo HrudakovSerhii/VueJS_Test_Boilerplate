@@ -1,8 +1,11 @@
 <template>
 	<div class="hello">
 		<h1> {{ greeting }}</h1>
-		<output-field></output-field>
-		<messages></messages>
+		<ul class="cards">
+			<li class="cards__list" v-for="card in cardList">
+				<cardView :cName="card.cardName" :cLabel="card.cardLabel"></cardView>
+			</li>
+		</ul>
 	</div>
 </template>
 
@@ -11,32 +14,42 @@
 
 	import Vue from 'vue'
 
-	import Output from 'Templates/input/output.vue'
-	import Messages from 'Templates/input/message.vue'
+	import Card from 'Components/Card.vue'
 
-	Vue.component('output-field', Output)
-	Vue.component('messages', Messages)
+	Vue.component('cardView', Card)
+
+	let cardArray = [
+		{ cardName: "one", cardLabel: "image 1" },
+		{ cardName: "two", cardLabel: "image 2" },
+		{ cardName: "three", cardLabel: "image 3" },
+		{ cardName: "four", cardLabel: "image 4" },
+		{ cardName: "five", cardLabel: "image 5" },
+		{ cardName: "six", cardLabel: "image 6" }
+	];
 
 	export default {
 		name: 'hello',
 		data: function() {
 			return {
+				cardList: cardArray,
 				greeting: 'Hello!'
-			}
+			};
 		}
 	}
 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-	h1 {
-		color: white;
-		font-size: 30px;
+<style lang="scss">
+
+	.cards {
+		.cards__list {
+			display: inline-block;
+		    position: relative;
+		    width: 270px;
+		    height: 410px;
+		    margin: 10px;
+		}
 	}
 
-	input-field {
-		font-size: 30px;
-		color: white;
-	}
 </style>

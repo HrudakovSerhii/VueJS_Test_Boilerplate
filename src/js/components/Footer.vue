@@ -40,7 +40,7 @@
 
         // Use this parameter to hide footer after main-content size is less than minimus size that setted by main-content-block-height variable
 
-        bottom: 51px;
+        bottom: 0;
         position: relative;
 
 		.c-footer-c {

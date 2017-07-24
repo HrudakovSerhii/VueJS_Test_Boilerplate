@@ -39,13 +39,13 @@
 	.c-header {
 		position: absolute;
 		width: 100%;
+		top: 0;
 
 		.c-header-c {
 			background-image: url('~Images/hz/header.png');
 			background-size: contain;
 			text-align: center;
 			height: 50px;
-			top: 0px;
 
 			.c-header-content {
 				text-align: center;
