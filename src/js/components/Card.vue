@@ -1,14 +1,14 @@
 <template>
   <div class="card"
   	v-on:click="clickCard"
-  	v-on:mouseover="cursorOver"
-  	v-on:mousemove="cursorOver"
-  	v-on:mouseout="cursorOut">
+  	v-on:mouseover="touchCard"
+  	v-on:mousemove="touchCard"
+  	v-on:mouseout="stopTouchCard">
 
-	<div class="card__item" v-bind:style="{ 'webkitTransform': transform } ">
+	<div class="card__item" v-bind:style="cardItemStyle">
   		<img class="card__item-img" src="~Images/butterfly.jpg"/>
   		<transition name="fade">
-	    	<span v-show="show_shadow" class="card__item-shadow" v-bind:style="{'background': shadow}"></span>
+	    	<span v-show="show_shadow" class="card__item-shadow" v-bind:style="itemShadowStyle"></span>
 	  	</transition>
   		<svg class="card__item-border" xmlns="http://www.w3.org/2000/svg">
   			<rect height="100%" width="100%" v-bind:style=""></rect>
@@ -26,37 +26,33 @@
 	import style from 'Styles/style.scss'
 	import Vue from 'vue'
 
-	var focusOutAnimationStop = true;
-
 	export default {
 		data: function() {
 			return {
-				transform: '',
-				shadow: '',
+				cardItemStyle: '',
+				itemShadowStyle: '',
 				rX: 0,
 				rY: 0,
 				angle: 0,
 				transparent: 0,
 				prevAngle: 0,
 				prevTransparent: 0,
-				animCount: 0,
 				animTimer: 0,
-				show_shadow: true,
-				enableForStart: false
+				show_shadow: true
 			}
 		},
 		props: ['cName', 'cLabel'],
 		name: 'card',
 		methods: {
 			clickCard: function() {
-				this.show_shadow = !this.show_shadow;
+				// this.show_shadow = !this.show_shadow;
 			},
 
-			cursorOver: function(event) {
-				if(this.animCount) {
-					this.animCount = 0;
-					this.setDefoultState();
+			touchCard: function(event) {
+				if (this.animTimer) {
+					this.endAnimation();
 				}
+
 				// Get % coordinate of mouse
 				var mpX = event.offsetX / (this.$el.clientWidth / 100);
 				var mpY = event.offsetY / (this.$el.clientHeight / 100);
@@ -70,78 +66,79 @@
 					this.rY = (mpX - 50) / 10;
 				}
 
-				this.angle = (40 / 100) * mpX + 20;
-				this.transparent = (40 / 100) * mpY + 20;
+				this.angle = 30 / 100 * mpX + 30;
+				this.transparent = (60 / 100) * mpY + 30;
 
-				this.shadow = "linear-gradient(" + this.angle + "deg, #ffffff, transparent " + this.transparent + "%)";
-				this.transform = "rotateX(" + this.rX + "deg) rotateY(" + this.rY + "deg)";
-
-				return this;
+				this.setUpAnimation(this.rX, this.rY, this.angle, this.transparent);
 			},
 
-			cursorOut: function(event) {
-				if (!this.animCount) {
-					this.initAnimationState();
-					this.updateAnimation();
+			stopTouchCard: function(event) {
+				event.stopPropagation();
+
+				this.startAnimation();
+			},
+
+			startAnimation: function() {
+				if (!this.animTimer) {
+					this.initAnimation();
+					this.processAnimation();
 				} else {
-					this.outAnimation();
+					setTimeout(this.processAnimation, this.animTimer);
 				}
-
-				return this;
 			},
 
-			updateAnimation: function() {
-				if (!this.animCount) {
-					return this;
-				}
+			initAnimation: function() {
+				this.animTimer = 600;
+				this.prevAngle = this.angle;
+				this.prevTransparent = this.transparent;
+			},
 
-				this.animCount--;
-				this.animTimer -= 50;
+			processAnimation: function() {
+				this.animTimer -= 100;
 
 				this.rX = this.rX > 0 ? -Math.abs(this.rX - 1.2) : Math.abs(this.rX + 1.2);
 				this.rY = this.rY > 0 ? -Math.abs(this.rY - 1.2) : Math.abs(this.rY + 1.2);
 
-				this.angle = this.prevAngle > 35 ? this.angle - 5 : this.angle + 5;
-				this.transparent = this.prevTransparent > 50 ? this.transparent - 5 : this.transparent + 5
-
-				this.shadow = "linear-gradient(" + this.angle + "deg, #ffffff, transparent " + this.transparent + "%)";
-
-				this.transform = "rotateX(" + this.rX + "deg) rotateY(" + this.rY + "deg)";
+				this.angle = this.prevAngle > 45 ? this.angle - 5 : this.angle + 5;
+				this.transparent = this.prevTransparent > 59 ? this.transparent - 7.5 : this.transparent + 7.5
 
 				this.show_shadow = !this.show_shadow;
 
-				if (this.animCount > 0) {
-					this.outAnimation();
+				this.setUpAnimation(this.rX, this.rY, this.angle, this.transparent);
+
+				if (this.animTimer > 200) {
+					this.startAnimation();
 				} else {
-					this.setDefoultState();
+					this.endAnimation();
 				}
-
-				return this;
 			},
 
-			outAnimation: function() {
-				setTimeout(this.updateAnimation, this.animTimer);
+			setUpAnimation: function(rX = 0, rY = 0, angle = 40, transparent = 30) {
+				this.cardItemStyle = {
+					'webkitTransform': "rotateX(" + rX + "deg) rotateY(" + rY + "deg)"
+				};
 
-				return this;
+				this.itemShadowStyle = {
+					'background': "linear-gradient(" + angle + "deg, #ffffff, transparent " + transparent + "%)"
+				};
 			},
 
-			setDefoultState: function() {
-				this.animCount = 0;
+			endAnimation: function() {
+				this.animTimer = 0;
 				this.prevAngle = 0;
 				this.prevTransparent = 0;
-				this.shadow = "linear-gradient(20deg, #ffffff, transparent 20%)";
-				this.transform = "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)";
+				this.show_shadow = true;
 
-				return this;
+				this.setUpAnimation();
 			},
 
-			initAnimationState: function() {
-				this.animCount = 4;
-				this.animTimer = 600;
-				this.prevAngle = this.angle;
-				this.prevTransparent = this.transparent;
-
-				return this;
+			stopMoveCard: function(event) {
+				if (this.animTimer === 200) {
+					this.initAnimation();
+					this.focusOutAnimation();
+				} else {
+					setTimeout(this.focusOutAnimation, this.animTimer);
+				}
 			}
 		}
 	}
@@ -157,7 +154,7 @@
 	    float: left;
 
 	    .fade-enter-active, .fade-leave-active {
-	    	opacity: 0.85;
+	    	opacity: 0.80;
 		  	transition: opacity .6s
 		}
 
@@ -172,6 +169,10 @@
 		    -webkit-transform-style: preserve-3d;
 		    will-change: transform;
 		    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+
+		    -webkit-transition: .8s ease-in-out;
+		    -moz-transition: .8s ease-in-out;
+		    -o-transition: .8s ease-in-out;
 		    transition: .8s ease-in-out;
 
 		    .card__item-img {
@@ -204,6 +205,7 @@
 				    line-height: 1;
 				    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 				}
+
 				.card__item-type {
 					display: block;
 				    margin-bottom: 0;
@@ -216,6 +218,7 @@
 				    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 				}
 			}
+
 			.card__item-shadow {
 			    position: absolute;
 			    width: 100%;
@@ -227,13 +230,15 @@
 			    z-index: 1;
 			    -webkit-backface-visibility: hidden;
 			    backface-visibility: hidden;
-			    background-image: -webkit-linear-gradient(20deg, #ffffff, transparent 20%);
-			    background-image: linear-gradient(20deg, #ffffff, transparent 20%);
 
-			    -webkit-transition: .8s ease-in-out;
-			    -moz-transition: .8s ease-in-out;
-			    -o-transition: .8s ease-in-out;
-			    transition: .8s ease-in-out;
+			    -webkit-transition: opacity 1s ease-in-out;
+				-moz-transition: opacity 1s ease-in-out;
+				-ms-transition: opacity 1s ease-in-out;
+				-o-transition: opacity 1s ease-in-out;
+				transition: opacity 1s ease-in-out;
+
+			    background-image: -webkit-linear-gradient(45deg, #ffffff, transparent 40%);
+			    background-image: linear-gradient(45deg, #ffffff, transparent 40%);
 			}
 
 			.card__item-border {
@@ -259,6 +264,7 @@
 				    transition: stroke-dasharray 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),stroke-dashoffset 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 				}
 			}
+
 			.card__item-link {
 				display: block;
 			    position: absolute;
@@ -270,19 +276,22 @@
 			    left: 0;
 			    z-index: 10;
 			}
-
-			&:hover {
-				transition: none;
-			}
 		}
 
 		&:hover {
-	    	.card__item-border {
-	    		rect {
-	    			stroke-dasharray: 1362;
-					stroke-dashoffset: 0;
-				}
-	    	}
+			.card__item {
+				transition: none;
+				-webkit-transition: none;
+			    -moz-transition: none;
+			    -o-transition: color 0 ease-in;
+
+			    .card__item-border {
+		    		rect {
+		    			stroke-dasharray: 1362;
+						stroke-dashoffset: 0;
+					}
+		    	}
+			}
 	    }
 
 	    &:after {
