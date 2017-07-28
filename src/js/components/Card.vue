@@ -237,8 +237,8 @@
 				-o-transition: opacity 1s ease-in-out;
 				transition: opacity 1s ease-in-out;
 
-			    background-image: -webkit-linear-gradient(45deg, #ffffff, transparent 40%);
-			    background-image: linear-gradient(45deg, #ffffff, transparent 40%);
+			    background-image: -webkit-linear-gradient(45deg, #ffffff, transparent 30%);
+			    background-image: linear-gradient(45deg, #ffffff, transparent 30%);
 			}
 
 			.card__item-border {
