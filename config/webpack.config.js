@@ -11,12 +11,12 @@ module.exports = {
 	devtool: 'source-map',
 	context: resolve('./src/'),
 	entry: {
-		app: resolve('src/main.js')
+		app: resolve('src/js/main.js')
 	},
     output: {
-    	filename: '[name].bundle.js',
-		path: resolve('./public'),
-		publicPath: '/assets/'
+    	filename: '[name].js',
+		publicPath: 'assets/',
+		path: resolve('dist/assets')
 	},
 	devServer: {
 		contentBase: resolve('./src')
@@ -31,7 +31,7 @@ module.exports = {
 			Images: 	resolve('public/assets'),
 			Utility:    resolve('utils')
 		},
-		extensions: ['.js', '.jsx', '.vue']
+		extensions: ['.js', '.jsx', '.css', '.vue']
 	},
 	module: {
 		loaders: [
@@ -58,18 +58,17 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-        		use: [
-        			'style-loader',
-        			'css-loader'
-        		]
+        		use: ExtractTextPlugin.extract({
+        			fallback: 'style-loader',
+        			use: "css-loader"
+        		})
 			},
 			{
 				test: /\.(sass|scss)$/,
-				use: [
-					'style-loader',
-					'css-loader',
-					'sass-loader'
-				]
+				use: ExtractTextPlugin.extract({
+        			fallback: 'style-loader',
+        			use: "css-loader!sass-loader"
+        		})
 			},
 			{
 				test: /\.html$/,
@@ -82,22 +81,11 @@ module.exports = {
 			    	}
 			    ]
 			}
-			// {
-			// 	test: /\.css$/,
-			// 	use: ExtractTextPlugin.extract({
-			// 		fallback: 'style-loader',
-		 //        	use: 'css-loader'
-		 //        })
-			// },
-			// {
-		 //        test: /\.(sass|scss)$/,
-		 //        use: ExtractTextPlugin.extract({
-			//     	fallback: 'style-loader',
-			//     	use: 'css-loader!sass-loader',
-			// 	}),
-	  //     	}
 		]
-	}
+	},
+	plugins: [
+		new ExtractTextPlugin("[name].css")
+	]
 }
 
 

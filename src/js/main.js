@@ -5,7 +5,7 @@ import $ from 'jquery'
 import 'babel-polyfill'
 
 import Vue from 'vue'
-import Apps from './App.vue'
+import Apps from '../App.vue'
 import router from 'Code/router/index'
 
 new Vue({

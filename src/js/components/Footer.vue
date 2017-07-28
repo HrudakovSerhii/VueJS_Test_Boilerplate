@@ -27,7 +27,7 @@
 
 <style lang="scss">
 
-    @import "~Styles/base.scss";
+    @import "~Styles/main.scss";
 
 	.c-footer {
 		width: 100%;

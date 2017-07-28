@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import base from 'Styles/base.scss';
+  // import base from 'Styles/main.scss';
 
   import Vue from 'vue'
   import Header from 'Components/Header.vue'
@@ -30,30 +30,6 @@
 
 <style scoped lang="scss">
 
-  @import "~Styles/base.scss";
+  // @import "~Styles/main.scss";
 
-  #app {
-    width: 100%;
-    height: auto;
-    min-width: 320px;
-    text-align: center;
-    color: #2c3e50;
-
-    .main-content {
-      min-height: $main-content-block-height;
-      width: 100%;
-      height: 100%;
-      margin-top: 50px;
-
-      .main-content-row {
-        width: 90%;
-        height: 100%;
-
-        .main-content-container {
-          position: relative;
-          width: 100%;
-        }
-      }
-  }
-}
 </style>
