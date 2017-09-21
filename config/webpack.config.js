@@ -8,10 +8,11 @@ var resolve = function(path) {
 }
 
 module.exports = {
-	devtool: 'source-map',
+	devtool: 'source-map', //'cheap-module-eval-source-map', // use 'cheap-source-map' for prod TODO
 	context: resolve('./src/'),
 	entry: {
-		app: resolve('src/js/main.js')
+		app: resolve('src/js/main.js'),
+		message: resolve('src/templates/message.js')
 	},
     output: {
     	filename: '[name].js',
@@ -34,7 +35,7 @@ module.exports = {
 		extensions: ['.js', '.jsx', '.css', '.vue']
 	},
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.js$/,
 				use: 'babel-loader',
@@ -59,15 +60,17 @@ module.exports = {
 			{
 				test: /\.css$/,
         		use: ExtractTextPlugin.extract({
-        			fallback: 'style-loader',
+        			fallbackLoader: 'style-loader',
         			use: "css-loader"
         		})
 			},
 			{
 				test: /\.(sass|scss)$/,
-				use: ExtractTextPlugin.extract({
+				exclude: /(node_modules)/,
+				loader: ExtractTextPlugin.extract({
         			fallback: 'style-loader',
-        			use: "css-loader!sass-loader"
+        			use: 'css-loader!sass-loader',
+        			publicPath: "../dist/"
         		})
 			},
 			{
