@@ -1,16 +1,17 @@
+
 <template>
-  <div class="c-header">
-  	<div class="c-header-c">
-		<div class="c-header-content">
-			<a href="#/" class="c-header-text hz-black-text c-header-home-link">Home</a>
-			<div class="c-header-text hz-black-text c-header-spacer"></div>
-			<a class="c-header-text hz-black-text" href="#/about">About</a>
-			<div class="c-header-text hz-black-text c-header-spacer"></div>
-			<a class="c-header-text hz-black-text" href="#/">New</a>
-    	</div>
+	<div class="c-header">
+		<div class="c-header-c">
+			<div class="c-header-content">
+				<a href="#/" class="c-header-text hz-black-text c-header-home-link">Home</a>
+				<div class="c-header-text hz-black-text c-header-spacer"></div>
+				<a class="c-header-text hz-black-text" href="#/about">About</a>
+				<div class="c-header-text hz-black-text c-header-spacer"></div>
+				<a class="c-header-text hz-black-text" href="#/">New</a>
+			</div>
+		</div>
+		<div class="c-header-mobile-btn"></div>
 	</div>
-	<div class="c-header-mobile-btn"></div>
-  </div>
 </template>
 
 <script>
@@ -89,13 +90,13 @@
 			display: inline-block;
 			position: absolute;
 			width: 22px;
-		    height: 29px;
+			height: 29px;
 			background: url('~Images/burger.png');
-		    background-repeat: no-repeat;
-		    right: 20px;
-		    top: 14px;
+			background-repeat: no-repeat;
+			right: 20px;
+			top: 14px;
 
-		    @media( min-width:769px ) {
+			@media( min-width:769px ) {
 				visibility: hidden;
 				display: none;
 			}

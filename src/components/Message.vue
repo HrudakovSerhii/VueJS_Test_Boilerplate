@@ -7,7 +7,7 @@
 </template>
 
 <script>
-	import Input from 'Templates/input/Input.vue'
+	import Input from 'Input.vue'
 	import Template from 'Templates/html_templates/template'
 
 	export default {
