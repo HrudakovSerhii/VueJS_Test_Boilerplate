@@ -25,9 +25,7 @@
   </div>
 </template>
 
-<style lang="scss">
-
-    @import "~Styles/base.scss";
+<style lang="scss" rel="stylesheet/scss">
 
 	.c-footer {
 		width: 100%;

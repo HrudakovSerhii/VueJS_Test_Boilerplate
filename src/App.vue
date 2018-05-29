@@ -28,9 +28,9 @@
 
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="scss" rel="stylesheet/scss">
 
-  @import "~Styles/base.scss";
+  /*@import "~Styles/base.scss";*/
 
   #app {
     width: 100%;
@@ -40,7 +40,7 @@
     color: #2c3e50;
 
     .main-content {
-      min-height: $main-content-block-height;
+      min-height: main-content-block-height;
       width: 100%;
       height: 100%;
       margin-top: 50px;

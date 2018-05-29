@@ -27,8 +27,6 @@
 	import style from 'Styles/style.scss'
 	import Vue from 'vue'
 
-	var focusOutAnimationStop = true;
-
 	export default {
 		data: function() {
 			return {
@@ -156,7 +154,7 @@
 
 </script>
 
-<style lang="scss">
+<style lang="scss" rel="stylesheet/scss">
 
 	.card {
 		position: absolute;
@@ -211,6 +209,7 @@
 				    line-height: 1;
 				    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 				}
+
 				.card__item-type {
 					display: block;
 				    margin-bottom: 0;
@@ -223,6 +222,7 @@
 				    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 				}
 			}
+
 			.card__item-shadow {
 			    position: absolute;
 			    width: 100%;

@@ -34,7 +34,7 @@
 	});
 </script>
 
-<style lang="scss">
+<style lang="scss" rel="stylesheet/scss">
 
 	.c-header {
 		position: absolute;
@@ -42,7 +42,7 @@
 		top: 0;
 
 		.c-header-c {
-			background-image: url('~Images/hz/header.png');
+			/*background-image: url('~Images/hz/header.png');*/
 			background-size: contain;
 			text-align: center;
 			height: 50px;
