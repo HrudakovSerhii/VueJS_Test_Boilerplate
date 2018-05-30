@@ -5,11 +5,10 @@
       <div class="main-content-row hc-c">
         <div class="main-content-container">
           <router-view></router-view>
+          <message></message>
           <templateOne></templateOne>
           <templateTwo></templateTwo>
           <templateTwoCopy></templateTwoCopy>
-          <message></message>
-          <h1>End this is other h1 element </h1>
         </div>
       </div>
     </div>
@@ -34,8 +33,8 @@
     Vue.component('message', Message);
 
     Vue.component('templateTwoCopy', {
-        name: 'template-3',
-        template: '#template-3'
+        name: 'template-2',
+        template: '#template-2'
     });
 
 
