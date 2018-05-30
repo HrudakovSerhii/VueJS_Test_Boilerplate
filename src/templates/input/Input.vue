@@ -1,16 +1,7 @@
-<template>
-	<div id="input-f">
-		<!-- <p>{{ msg }} (sended from parent component via props)</p>
-		Type here to see data dinding: -->
-		<input type="text" v-model="message"></input>
-		<input type="text" :value='msg' @input="changeMessage">
-		<h1> {{ message }}</h1>
-	</div>
-</template>
-
 <script>
 	export default {
 		props: ['msg'],
+		template: require('Templates/html/template.html'),
 		data() {
 			return {
 				message: ''
@@ -25,10 +16,11 @@
 	}
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style scoped lang="scss" rel="stylesheet/scss">
 	#input-f {
 		color: Black;
 		font-size: 30px;
+        background-color: darkgrey;
 
 		p {
 			padding: 0;
@@ -37,7 +29,7 @@
 		}
 
 		h1 {
-			color: white;
+			color: black;
 			text-size: 30px;
 		}
 	}
