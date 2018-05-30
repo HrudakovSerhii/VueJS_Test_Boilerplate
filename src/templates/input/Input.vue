@@ -11,7 +11,7 @@
 <script>
 	export default {
 		props: ['msg'],
-		data() { //ES6 syntax
+		data() {
 			return {
 				message: ''
 			}
@@ -25,7 +25,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" rel="stylesheet/scss">
 	#input-f {
 		color: Black;
 		font-size: 30px;

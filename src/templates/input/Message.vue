@@ -22,7 +22,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" rel="stylesheet/scss" scoped>
 	.app-m, h1 {
 		color: Blue;
 		font-size: 30px;
