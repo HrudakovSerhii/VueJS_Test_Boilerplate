@@ -9,3 +9,4 @@ dist
 .idea/watcherTasks.xml
 .idea/workspace.xml
 package-lock.json
+src/js/servises/RequestAccessData.js

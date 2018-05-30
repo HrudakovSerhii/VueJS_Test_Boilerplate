@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-  <app-header></app-header>
-  <div class="main-content">
-  <div class="main-content-row hc-c">
-  <div class="main-content-container">
-  <router-view></router-view>
-  </div>
-  </div>
-  </div>
-  <app-footer></app-footer>
+    <app-header></app-header>
+    <div class="main-content">
+      <div class="main-content-row hc-c">
+        <div class="main-content-container">
+              <!--<router-view></router-view>-->
+        </div>
+       </div>
+    </div>
+    <app-footer></app-footer>
   </div>
 </template>
 
@@ -23,14 +23,16 @@
   Vue.component('app-footer', Footer)
 
   export default {
-    name: 'app'
+  	name: 'app',
+    created: {
+
+    }
   }
 
 </script>
 
 <style scoped lang="scss" rel="stylesheet/scss">
-
-  /*@import "~Styles/base.scss";*/
+  @import '~Styles/variables/custom_variables.scss';
 
   #app {
     width: 100%;
@@ -40,7 +42,7 @@
     color: #2c3e50;
 
     .main-content {
-      min-height: main-content-block-height;
+      min-height: $main-content-block-height;
       width: 100%;
       height: 100%;
       margin-top: 50px;
