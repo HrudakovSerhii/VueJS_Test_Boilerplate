@@ -1,6 +1,6 @@
 <template>
   <div class="c-header">
-  	<div class="c-header-c">
+  	<div class="c-header-c" v-bind:class="{ 'mobile-menu': isActive }">
 		<div class="c-header-content">
 			<a href="#/" class="c-header-text hz-black-text c-header-home-link">Home</a>
 			<div class="c-header-text hz-black-text c-header-spacer"></div>
@@ -9,40 +9,36 @@
 			<a class="c-header-text hz-black-text" href="#/">New</a>
     	</div>
 	</div>
-	<div class="c-header-mobile-btn"></div>
+	<div class="c-header-mobile-btn" v-on:click="showHideMobileMenu">Menu</div>
   </div>
 </template>
 
 <script>
-	import $ from 'jquery';
-
 	export default {
-	    name: 'app-header'
-	}
-
-	$(document).ready(function() {
-		$('.c-header-mobile-btn').off();
-		$('.c-header-mobile-btn').on('click', function(e){
-			if ($('.c-header-c').hasClass('mobile-menu')){
-				$('.c-header-c').removeClass('mobile-menu');
-			} else {
-				$('.c-header-c').addClass('mobile-menu');
+		name: 'app-header',
+		data: function () {
+			return {
+				isActive: false
 			}
-
-			e.preventDefault();
-		});
-	});
+		},
+		methods: {
+			showHideMobileMenu: function () {
+				console.log('click')
+				this.isActive = !this.isActive;
+			}
+		}
+	}
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
 
 	.c-header {
-		position: absolute;
+		position: relative;
 		width: 100%;
 		top: 0;
 
 		.c-header-c {
-			/*background-image: url('~Images/hz/header.png');*/
+			background-color: darkgrey;
 			background-size: contain;
 			text-align: center;
 			height: 50px;
@@ -88,12 +84,10 @@
 		.c-header-mobile-btn {
 			display: inline-block;
 			position: absolute;
-			width: 22px;
-		    height: 29px;
-			background: url('~Images/burger.png');
-		    background-repeat: no-repeat;
-		    right: 20px;
-		    top: 14px;
+			background-color: white;
+			line-height: 24px;
+			right: 20px;
+			top: 14px;
 
 		    @media( min-width:769px ) {
 				visibility: hidden;

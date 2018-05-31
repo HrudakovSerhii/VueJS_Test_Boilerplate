@@ -1,4 +1,4 @@
-@import "~Styles/variables/custom_variables.scss";
+@import '~Styles/style.scss';
 
 html {
     width: 100%;
@@ -59,4 +59,9 @@ ul {
 
 .v-spacer {
 	height: 10px;
+}
+
+.template {
+	text-align: left;
+	padding: 10px;
 }
