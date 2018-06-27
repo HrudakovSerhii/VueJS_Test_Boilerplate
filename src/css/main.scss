@@ -14,50 +14,50 @@ body {
 }
 
 h1 {
-	margin: 0;
+    margin: 0;
 }
 
 p, a, h1 {
-	font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 ul {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 /* Vertical center container */
 .vc-c {
-	position: relative;
-	width: 100%;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+    position: relative;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Horisontal centered container */
 .hc-c {
-	margin-left: auto;
-	margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Image block container */
 .image-block {
-	background-repeat: no-repeat;
-	background-size: cover;
+    background-repeat: no-repeat;
+    background-size: cover;
 
-	&:before {
-	  	content: '';
-	  	display: block;
-	}
+    &:before {
+        content: '';
+        display: block;
+    }
 }
 
 .h-spacer {
-	width: 10px;
+    width: 10px;
 }
 
 .v-spacer {
-	height: 10px;
+    height: 10px;
 }

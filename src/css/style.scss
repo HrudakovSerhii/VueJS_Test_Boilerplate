@@ -1,12 +1,6 @@
-
-%horisontalCenter {
-	margin-left: auto;
-	margin-right: auto;
-}
-
 @mixin horisontalCenter() {
-	margin-left: auto;
-	margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #app {
@@ -17,19 +11,18 @@
     color: #2c3e50;
 
     .main-content {
-		// min-height: $main-content-block-height;
-		width: 100%;
-		height: 100%;
-		margin-top: 50px;
+        width: 100%;
+        height: 100%;
+        margin-top: 50px;
 
-		.main-content-row {
-			width: 90%;
-			height: 100%;
+        .main-content-row {
+            width: 90%;
+            height: 100%;
 
-			.main-content-container {
-				position: relative;
-				width: 100%;
-			}
-		}
-	}
+            .main-content-container {
+                position: relative;
+                width: 100%;
+            }
+        }
+    }
 }

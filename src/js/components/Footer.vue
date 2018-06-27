@@ -27,39 +27,39 @@
 
 <style lang="scss">
 
-    @import "~Styles/main.scss";
+@import "~Styles/main.scss";
 
-	.c-footer {
-		width: 100%;
-		height: 51px;
-		background-color: white;
+.c-footer {
+    width: 100%;
+    height: 51px;
+    background-color: white;
 
-        // Use this parameters for set footer always visible on a screen
-        // bottom: 0;
-        // position: fixed;
+    // Use this parameters for set footer always visible on a screen
+    // bottom: 0;
+    // position: fixed;
 
-        // Use this parameter to hide footer after main-content size is less than minimus size that setted by main-content-block-height variable
+    // Use this parameter to hide footer after main-content size is less than minimus size that setted by main-content-block-height variable
 
-        bottom: 0;
-        position: relative;
+    bottom: 0;
+    position: relative;
 
-		.c-footer-c {
-			display: inline-block;
-    		width: 50%;
+    .c-footer-c {
+        display: inline-block;
+        width: 50%;
 
-    		.c-footer-links-container {
-    			widows: 100%;
+        .c-footer-links-container {
+            width: 100%;
 
-    			.c-footer-links {
-    				list-style-type: none;
-                    line-height: 50px;
+            .c-footer-links {
+                list-style-type: none;
+                line-height: 50px;
 
-    				li {
-    					display: inline-block;
-    				}
-    			}
-    		}
-		}
-	}
+                li {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
 
 </style>

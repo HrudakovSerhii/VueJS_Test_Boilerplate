@@ -6,11 +6,13 @@ var resolve = function (path) {
 };
 
 module.exports = {
-	devtool: 'source-map', //'cheap-module-eval-source-map', // use 'cheap-source-map' for prod TODO
-	context: resolve('./src/'),
-	entry: {
-		app: resolve('src/js/main.js'),
-		message: resolve('src/templates/message.js')
+    devtool: 'source-map', //'cheap-module-eval-source-map', // use 'cheap-source-map' for prod TODO
+    context: resolve('./src/'),
+    entry: {
+        app: [
+            resolve('src/js/main.js'),
+            resolve('src/css/main.scss')
+        ]
 	},
 	devServer: {
 		contentBase: resolve('./src')
