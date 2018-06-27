@@ -1,11 +1,9 @@
-const PATH = require('path');
-const WEBPACK = require('webpack');
-
+const Path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var resolve = function(path) {
-	return PATH.resolve(__dirname, '..', path); // This structure used because of directory of this file (its in config folder)
-}
+var resolve = function (path) {
+	return Path.resolve(__dirname, '..', path); // This structure used because of directory of this file (its in config folder)
+};
 
 module.exports = {
 	devtool: 'source-map', //'cheap-module-eval-source-map', // use 'cheap-source-map' for prod TODO
@@ -14,13 +12,13 @@ module.exports = {
 		app: resolve('src/js/main.js'),
 		message: resolve('src/templates/message.js')
 	},
-    output: {
-    	filename: '[name].js',
-		publicPath: 'assets/',
-		path: resolve('dist/assets')
-	},
 	devServer: {
 		contentBase: resolve('./src')
+	},
+	output: {
+		filename: '[name].js',
+		publicPath: 'assets/',
+		path: resolve('dist/assets')
 	},
 	resolve: {
 		alias: {
@@ -48,39 +46,39 @@ module.exports = {
 					options: {
 						'css': 'vue-style-loader!css-loader',
 						'scss': 'vue-style-loader!css-loader!sass-loader',
-            			'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+						'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
 					}
 				}
 			},
 			{
-			    test: /\.(png|gif|jpg|svg)$/,
-			    use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]',
-			    include: resolve('public/assets')
+				test: /\.(png|gif|jpg|svg)$/,
+				use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]',
+				include: resolve('public/assets')
 			},
 			{
 				test: /\.css$/,
-        		use: ExtractTextPlugin.extract({
-        			fallbackLoader: 'style-loader',
-        			use: "css-loader"
-        		})
+				use: ExtractTextPlugin.extract({
+					fallbackLoader: 'style-loader',
+					use: "css-loader"
+				})
 			},
 			{
 				test: /\.(sass|scss)$/,
 				exclude: /(node_modules)/,
 				loader: ExtractTextPlugin.extract({
-        			fallback: 'style-loader',
-        			use: 'css-loader!sass-loader',
-        			publicPath: "../dist/"
-        		})
+					fallback: 'style-loader',
+					use: 'css-loader!sass-loader',
+					publicPath: "../dist/"
+				})
 			},
 			{
 				test: /\.html$/,
 				use: [
 					{
-			     		loader: 'html-loader',
-			      		options: {
-			        		minimize: true
-			      		}
+					loader: 'html-loader',
+						options: {
+							minimize: true
+						}
 			    	}
 			    ]
 			}
@@ -89,7 +87,7 @@ module.exports = {
 	plugins: [
 		new ExtractTextPlugin("[name].css")
 	]
-}
+};
 
 
 
